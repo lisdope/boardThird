@@ -24,10 +24,10 @@ integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwr
 			<table border="1" cellpadding="0" cellspacing="0" width="700" class="table table-hover fw-bold">
 				<thead class="table-dark">
 					<tr>
-						<th width="100">번호</th>
-						<th width="200">제목</th>
-						<th width="150">등록일</th>
-						<th width="150">등급</th>
+						<th width="50">번호</th>
+						<th width="200" style="text-align: center;">제목</th>
+						<th width="50">등록일</th>
+						<th width="50">등급</th>
 					</tr>
 				</thead>
 				<tbody class="table-dark">
@@ -58,6 +58,7 @@ integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwr
 					<td></td>
 					<td align="center"><a href="insertBoard.jsp">새글 등록</a></td>
 					<td></td>
+					<td></td>
 				</tr>
 				<c:if test="${sessionScope.user.grade eq 'ADMIN'}">
 				<tr>
@@ -69,23 +70,23 @@ integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwr
 				</tfoot>
 			</table>
 		</div>
-		
-		<br>
-		<div class ="center">
-		  <ul >
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination" style="width: 500px;">
 		    <c:if test="${pageMaker.prev}">
-		    	<li><a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+		    	<li  class="page-item"><a  class="page-link" aria-label="Previous" 
+		    	href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1)}"><span aria-hidden="true">&laquo;</span></a></li>
 		    </c:if> 
 		
 		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-		    	<li><a href="getBoardList.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+		    	<li class="page-item"><a class="page-link" href="getBoardList.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
 		    </c:forEach>
 		
 		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		    	<li><a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+		    	<li><a class="page-link" aria-label="Next" 
+		    	href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1)}"><span aria-hidden="true">&raquo;</span></a></li>
 		    </c:if> 
 		  </ul>
-		</div>
+		</nav>
 	</center>
 </body>
 </html>
