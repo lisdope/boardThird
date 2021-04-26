@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User"><!-- BoardDAO파일이 없어도 실행이 되는데 이 네임스페이스는 왜 이렇게 쓰는가 -->
+
+	<resultMap id="userResult" type="user">
+		<id property="userCode" column="USER_CODE" /> <!-- pk는 id 나머지 result -->
+	    <result property="id" column="ID"/>
+	    <result property="pw" column="PW"/>
+	    <result property="email" column="EMAIL"/>
+	    <result property="userImage" column="USER_IMAGE"/>
+	    <result property="name" column="NAME"/>
+	    <result property="birth" column="BIRTH" />
+	    <result property="postNum" column="POST_NUM"/>
+	    <result property="phoneCd" column="PHONE_CD"/>
+	    <result property="phoneNum" column="PHONE_NUM"/>
+	    <result property="address" column="ADDRESS"/>
+	    <result property="entDate" column="ENT_DATE" />
+	    <result property="grade" column="GRADE" />
+	</resultMap>
+
+
+
+	<select id="getUser" resultMap="userResult">
+		<![CDATA[
+		SELECT *
+		FROM TB_USER 
+		WHERE ID=#{id} AND PW=#{pw}
+		]]>
+	</select>
+	
+	<select id="getId" resultType="String">
+		<![CDATA[
+		SELECT ID
+		FROM TB_USER 
+		WHERE NAME=#{name}
+		]]>
+	</select>
+		<select id="idChk" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM TB_USER 
+		WHERE NAME=#{id}
+		]]>
+	</select>
+	<select id="getPw" resultType="String">
+		<![CDATA[
+		SELECT PW
+		FROM TB_USER 
+		WHERE ID=#{id}
+		]]>
+	</select>
+	
+	
+	<insert id="createUser" parameterType="user">
+		<![CDATA[
+			INSERT INTO TB_USER(
+				USER_CODE
+				  , ID
+				  , PW
+				  , EMAIL
+				  , USER_IMAGE
+				  , NAME
+				  , BIRTH
+				  , POST_NUM
+				  , PHONE_CD
+				  , PHONE_NUM
+				  , ADDRESS
+				  , ENT_DATE
+				  ) VALUES(
+				  USER_SEQ.NEXTVAL
+				  , #{id}
+				  , #{pw}
+				  , #{email}
+				  , #{userImage}
+				  , #{name}
+				  , #{birth}
+				  , #{postNum}
+				  , #{phoneCd}
+				  , #{phoneNum}
+				  , #{address}
+				  , TO_CHAR(SYSDATE, 'YYYY-MM-DD-HH24:MI')
+				  )
+		]]>
+	</insert>
+	<update id="updateUser" parameterType="user">
+		<![CDATA[
+		UPDATE TB_USER 
+		SET PW = #{pw}
+		,USER_IMAGE  = #{userImage}
+		,NAME        = #{name}
+		,BIRTH       = #{birth}
+		,POST_NUM = #{postNum}
+		,PHONE_CD = #{phoneCd}
+		,PHONE_NUM =#{phoneNum}
+		,address =  #{address}
+		WHERE USER_CODE = #{userCode}
+		]]>
+	</update>
+	
+	<delete id="deleteUser" parameterType="user">
+	<![CDATA[
+	DELETE FROM TB_USER WHERE USER_CODE = #{userCode}
+	]]>
+	</delete>
+
+
+
+
+</mapper>

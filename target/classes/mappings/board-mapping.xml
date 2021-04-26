@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+
+	<resultMap id="boardResult" type="board"><!-- board의 의미는 sql-map -->
+		<id property="boardNo" column="BOARD_NO" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardContents" column="BOARD_CONTENTS" />
+		<result property="boardDate" column="BOARD_DATE" />
+		<result property="userCode" column="USER_CODE" />
+		<result property="grade" column="GRADE" />
+		<result property="boardHits" column="BOARD_HITS" />
+		<result property="boardRating" column="BOARD_RATING" />
+		
+	</resultMap>
+	
+
+	<insert id="insertBoard" parameterType="board">
+		<![CDATA[
+		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING)
+		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, #{boardDate}, #{userCode}, 'USER', #{boardHits}, #{boardRating})
+		
+		]]>
+	</insert>
+	
+	<insert id="insertBoard_n" parameterType="board">
+		<![CDATA[
+		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING)
+		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, #{boardDate}, #{userCode}, 'ADMIN', #{boardHits}, #{boardRating})
+		
+		]]>
+	</insert>
+	
+	 
+	<update id="updateBoard" parameterType="board">
+		<![CDATA[
+		UPDATE TB_BOARD SET
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENTS = #{boardContents},
+		BOARD_DATE = #{boardDate},
+		USER_CODE = #{userCode},
+		GRADE     = #{grade},
+		BOARD_HITS =  #{boardHits},
+		BOARD_RATING = #{boardRating}
+		WHERE BOARD_NO = #{boardNo}
+		]]>
+	</update>
+
+	<delete id="deleteBoard" parameterType="board">
+		<![CDATA[
+		DELETE TB_BOARD
+		WHERE BOARD_NO = #{boardNo}
+		]]>
+	</delete>
+	 
+	<select id="getBoard" resultMap="boardResult" parameterType="board">
+		<![CDATA[
+		SELECT *
+		FROM TB_BOARD
+		WHERE BOARD_NO = #{boardNo}
+		]]>
+	</select>
+	 <!-- -->
+	<select id="getBoardList" resultMap="boardResult" parameterType="Criteria">
+		 SELECT  * FROM ( SELECT  BOARD_NO, 
+                        BOARD_TITLE, 
+                        BOARD_CONTENTS,
+                        BOARD_DATE, 
+                        USER_CODE,
+                        GRADE,
+                        BOARD_HITS,
+                        BOARD_RATING,
+		                ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS RNUM
+		        		FROM TB_BOARD) MP
+		WHERE (RNUM BETWEEN #{rowStart} AND #{rowEnd})
+		AND GRADE = 'USER'
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<select id="getBoardList_n" resultMap="boardResult" parameterType="Criteria">
+		 SELECT  * FROM ( SELECT  BOARD_NO, 
+                        BOARD_TITLE, 
+                        BOARD_CONTENTS,
+                        BOARD_DATE, 
+                        USER_CODE,
+                        GRADE,
+                        BOARD_HITS,
+                        BOARD_RATING,
+		                ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS RNUM
+		        		FROM TB_BOARD) MP
+		WHERE (RNUM BETWEEN #{rowStart} AND #{rowEnd})
+		AND GRADE = 'ADMIN'
+		ORDER BY BOARD_NO DESC
+	</select>
+	  
+	
+	<!-- 
+	<select id="getBoardList" resultMap="boardResult">
+	SELECT *
+	FROM TB_BOARD
+	ORDER BY BOARD_NO DESC
+	</select>
+	 -->
+	  
+
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(BOARD_NO)
+		  FROM TB_BOARD
+		 WHERE BOARD_NO > 0
+	]]>
+	</select><!-- 게시물의 총 갯구를 구하자 -->
+</mapper>
