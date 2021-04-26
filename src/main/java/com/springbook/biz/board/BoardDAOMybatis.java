@@ -36,7 +36,13 @@ public class BoardDAOMybatis{
 //	}
 	
 	public List<BoardVO> getBoardList(Criteria cri) {
-		return mybatis.selectList("Board.getBoardList", cri);
+		System.out.println("===> Mybatis로 getBoardList()기능 처리");
+		if(cri.getSearchCondition().equals("TITLE")) {
+			return mybatis.selectList("Board.getBoardList_t", cri);
+		}else if (cri.getSearchCondition().equals("CONTENT")) {
+			return mybatis.selectList("Board.getBoardList_c", cri);
+		}
+		return null;
 	}
 	public List<BoardVO> getBoardList_n(Criteria cri) {
 		return mybatis.selectList("Board.getBoardList_n", cri);

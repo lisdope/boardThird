@@ -70,17 +70,30 @@ public class BoardController {
 	
 	// 글 목록&공지사항 목록 검색
 	@RequestMapping("/getBoardList.do" )
-	public String getBoardList( Model model ,Criteria cri) throws Exception {
-
-		model.addAttribute("boardList", boardService.getBoardList(cri));
-		model.addAttribute("boardList_n", boardService.getBoardList_n(cri));
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.listCount());
-		
-		model.addAttribute("pageMaker", pageMaker);
-		return "getBoardList.jsp"; 
-		
+	public String getBoardList( Model model ,Criteria cri, BoardVO vo) throws Exception {
+		// 목록 검색
+				// Null Check
+				if(cri.getSearchCondition() == null) {
+					cri.setSearchCondition("TITLE");
+				}else {
+					cri.setSearchCondition(vo.getSearchCondition());
+				}
+				if(cri.getSearchKeyword() == null) {
+					cri.setSearchKeyword("");
+				}else {
+					cri.getSearchKeyword();
+				}
+				// model 정보 저장
+				model.addAttribute("boardList", boardService.getBoardList(cri));
+				model.addAttribute("boardList_n", boardService.getBoardList_n(cri));
+				PageMaker pageMaker = new PageMaker();
+				pageMaker.setCri(cri);
+				pageMaker.setTotalCount(boardService.listCount());
+				
+				model.addAttribute("pageMaker", pageMaker);
+				
+				
+				return "getBoardList.jsp"; 
 	}
 
 	
