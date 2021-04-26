@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "abc.go.kr";
@@ -34,6 +34,7 @@ function inputIdChk(){
 	document.userInfo.idDuplication.value ="uncheck";
 }
 
+
 function checkValue(){
 	var form = document.userInfo;
 	if(!form.id.value){
@@ -58,11 +59,11 @@ function checkValue(){
 			<tr><td>아이디</td><td><input type="text"  style="width:100px;" name="id"  id="id" onkeydown="inputIdChk()"/>
 			<input type="button" onClick="idchk();" value="중복체크"/></td></tr>
 			<tr><td><input type="hidden" name="idDuplication" value="uncheck" ></td></tr>
-			<tr><td>비밀번호</td><td><input type="password"  style="width:100px;" name="pw" /></td></tr>
-			<tr><td>이름</td><td><input type="text"  style="width:50px;" name="name" /></td></tr>
-			<tr><td>생일</td><td><input type="text" name="birth" /></td></tr>
-			<tr><td>이메일</td><td><input type="text"  style="width:200px;" name="email" /></td></tr>
-			<tr><td>번호</td><td><select name="phoneCd">
+			<tr><td>비밀번호</td><td><input type="password"  style="width:100px;" name="pw" id="pw" /></td></tr>
+			<tr><td>이름</td><td><input type="text"  style="width:50px;" name="name" id="name" /></td></tr>
+			<tr><td>생일</td><td><input type="text" name="birth" id="birth" /></td></tr>
+			<tr><td>이메일</td><td><input type="text"  style="width:200px;" name="email" id="email" /></td></tr>
+			<tr><td>번호</td><td><select name="phoneCd" id="phoneCd">
 						<option value="010">010</option>
 						<option value="011">011</option>					
 					</select>

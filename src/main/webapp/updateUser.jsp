@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "abc.go.kr";
@@ -32,20 +32,21 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 <body>
 <form action="updateUser.do" name="form" id="form" method="post">
 		<table>
+			<tr><td><input type="hidden" name="userCode" value="${user.userCode }"/></td></tr>
 			<tr><td>아이디</td><td><input type="text"  style="width:100px;" name="id" value="${user.id}" /></td></tr>
 			<tr><td>비밀번호</td><td><input type="text"  style="width:100px;" name="pw" value="${user.pw}" /></td></tr>
 			<tr><td>이름</td><td><input type="text"  style="width:50px;" name="name" value="${user.name}" /></td></tr>
 			<tr><td>생일</td><td><input type="text" name="birth" value="${user.birth}" /></td></tr>
 			<tr><td>이메일</td><td><input type="text"  style="width:200px;" name="email" value="${user.email}" /></td></tr>
 			<tr><td>번호</td><td><select name="phoneCd">
-						<option value="01">01</option>
-						<option value="02">02</option>					
+						<option value="010">010</option>
+						<option value="011">011</option>					
 					</select>
 			<input type="text"  style="width:100px;" name="phoneNum" value="${user.phoneNum}" /></td></tr>
 			<tr><td>우편번호 </td><td><input type="text"  style="width:100px;" id="zipNo"  name="postNum" value="${user.postNum}"/><input type="button" onClick="goPopup();" value="주소검색"/></td>
 			<tr><td>도로명주소</td><td><input type="text"  style="width:500px;" id="roadFullAddr"  name="address" value="${user.address}"/></td></tr>
 			<tr><td>이미지</td><td><input type="text"  style="width:200px;" name="userImage" value="${user.userImage}" /></td></tr>
-			<tr><td><input type="submit" value="수정하기 " /></td></tr>
+			<tr><td><input type="submit" value="수정하기 " /></td><td><input type="button" value="회원탈퇴" onClick="location.href='deleteUser.do?userCode=${user.userCode}'"></td></tr>
 		</table>
 
 </form>
