@@ -51,4 +51,13 @@ public class BoardDAOMybatis{
 		return mybatis.selectOne("Board.listCount");
 	}
 	
+	public void updateBoardRating(BoardVO vo) {
+		mybatis.update("Board.updateBoardRating", vo);
+		
+	}
+	public void updateBoardRatingb(BoardVO vo) {
+		mybatis.update("Board.updateBoardRatingb", vo);
+	}
+	
+	
 }

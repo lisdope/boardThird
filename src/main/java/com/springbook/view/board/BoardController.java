@@ -95,6 +95,27 @@ public class BoardController {
 				
 				return "getBoardList.jsp"; 
 	}
+	
+	@RequestMapping("/updateBoardRating.do")
+	public String updateBoardRating(@ModelAttribute("board") BoardVO vo) {
+		System.out.println("updateBoardRating 실행");
+		System.out.println("vo");
+		
+		boardService.updateBoardRating(vo);
+	
+		return "getBoard.do";
+	}
+	
+	@RequestMapping("/updateBoardRatingb.do")
+	public String updateBoardRatingb(@ModelAttribute("board") BoardVO vo) {
+		System.out.println("updateBoardRatingb 실행");
+		System.out.println("vo");
+		
+		boardService.updateBoardRatingb(vo);
+	
+		return "getBoard.do";
+	
+	}
 
 	
 }

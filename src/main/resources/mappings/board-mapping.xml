@@ -12,7 +12,7 @@
 		<result property="grade" column="GRADE" />
 		<result property="boardHits" column="BOARD_HITS" />
 		<result property="boardRating" column="BOARD_RATING" />
-		
+		<result property="boardRatingb" column="BOARD_RATING_B" />
 	</resultMap>
 	
 
@@ -36,7 +36,7 @@
 	<update id="updateBoard" parameterType="board">
 		<![CDATA[
 		UPDATE TB_BOARD SET
-		BOARD_TITLE = #{boardTitle},
+		BOARD_TITLE = #{boardTitle},S
 		BOARD_CONTENTS = #{boardContents},
 		BOARD_DATE = #{boardDate},
 		USER_CODE = #{userCode},
@@ -144,4 +144,22 @@
 		 WHERE BOARD_NO > 0
 	]]>
 	</select><!-- 게시물의 총 갯구를 구하자 -->
+	
+	<update id="updateBoardRating" parameterType="board">
+		<![CDATA[
+		
+			UPDATE TB_BOARD
+			SET BOARD_RATING  = BOARD_RATING + 1
+			WHERE BOARD_NO = #{boardNo}
+		]]>
+	</update>
+	
+	<update id="updateBoardRatingb" parameterType="board">
+		<![CDATA[
+		
+			UPDATE TB_BOARD
+			SET BOARD_RATING_B  = BOARD_RATING_B + 1
+			WHERE BOARD_NO = #{boardNo}
+		]]>
+	</update>
 </mapper>
