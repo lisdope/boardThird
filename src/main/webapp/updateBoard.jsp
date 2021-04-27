@@ -15,11 +15,12 @@ body{
 <title>글 상세</title>
 </head>
 <body>
+<div class="container">
 	<center>
 		<hr>
 		<form class="form-inline" action="updateBoard.do" method="post">
 			<input type="hidden" name="no" value="${board.boardNo}">
-				<b> 게시글 번호 : ${board.boardNo} </b>
+				<p align="left"><b> 게시글 번호 :</b> ${board.boardNo} </p>
 				<br>
 			<div class="form-group">
 					<label for="exampleInputName2">제목 </label>
@@ -29,15 +30,16 @@ body{
 			<br>
 			<div class="form-group">
 					<label for="exampleInputName2">내용</label>
-					<textarea name="content" rows="5" cols="30" class="form-control"
+					<textarea class="form-control" name="content" rows="5" cols="30" 
 						style="width: 500px; height: 300px">${board.boardContents}</textarea>
 			</div>
 			<br>
 			<br>
-			<input class="btn btn-default" type="submit" value="글 수정">
+			<input class="btn btn-default" type="submit" value="수정">
 			<input class="btn btn-default" type="button" onclick="history.back(-1);" value="취소">
 		</form>
 	</center>
+	</div>
 	<hr>
 </body>
 </html>

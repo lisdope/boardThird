@@ -19,7 +19,12 @@
  h1{font-family: 'Noto Sans KR', sans-serif;}
  p.logout{font-family: 'Noto Sans KR', sans-serif;}
  
-
+.size{
+    height:30px;
+    width:70px;
+}
+.reply{
+border : 0px solid;}
 </style>
 </head>
 <body>
@@ -30,9 +35,6 @@
 		<a href="logout.do">Log-out</a></p>
 		  	
 				<table class="table table-bordered" border="1">
-				<colgroup>
-				<col span="6">
-				</colgroup>
 				<tbody>
 					<tr>
 						<th bgcolor="#dfefff">번호</th>
@@ -41,26 +43,20 @@
 						<td colspan="5" align="left">${board.boardTitle }</td>
 					</tr>
 					<tr>	
-						<th bgcolor="#dfefff">유저코드</th>
-						<td colspan="1" align="left">${board.userCode }</td>
-						<th bgcolor="#dfefff">유저(권한) 등급</th>
+						<th bgcolor="#dfefff">아이디</th>
+						<td colspan="1" align="left">${user.id }</td>
+						<th bgcolor="#dfefff">등급</th>
 						<td colspan="1" align="left">${board.grade }</td>
-						<th bgcolor="#dfefff">등록일</th>
-						<td colspan="1" align="left">${board.boardDate }</td>				
-					</tr>
-						<tr>
 						<th bgcolor="#dfefff">조회수</th>
 						<td colspan="1" align="left">${board.boardHits }</td>
-						<th bgcolor="#dfefff">좋아요</th>
-						<td align="left">${board.boardRating }</td>
-						<th bgcolor="#dfefff">싫어요</th>
-						<td align="left">${board.boardRatingb }</td>
+						<th bgcolor="#dfefff">등록일</th>
+						<td colspan="1" align="left">${board.boardDate }</td>				
 						</tr>
 					</tbody>
 					<tfoot>
 					<tr>
 						<th bgcolor="#dfefff">내용</th>
-						<td colspan="6" align="left">${board.boardContents}</td>
+						<td colspan="9" align="left">${board.boardContents}</td>
 					</tr>
 					</tfoot>
 				</table>
@@ -80,14 +76,14 @@
 		<input type="text" name="boardNo" style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode" style="display: none" value="${user.userCode}" />
 		<input type="text" name="boardRating"  style="display: none" value="${board.boardRating}" />
-		<button type="submit" style="font-size:12px">좋어요 <i class="fa fa-thumbs-o-up"></i></button>
+		<button type="submit" style="font-size:12px">좋어요 ${board.boardRating } <i class="fa fa-thumbs-o-up"></i></button>
 		</form>&nbsp;&nbsp;
 		
 		<form class="Rating" action="updateBoardRatingb.do" method="get">
 		<input type="text" name="boardNo"  style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode"  style="display: none" value="${user.userCode}" />
 		<input type="text" name="boardRatingb" style="display: none" value="${board.boardRatingb}" />
-		<button type="submit" style="font-size:12px">싫어요 <i class="fa fa-thumbs-o-down"></i></button>
+		<button type="submit" style="font-size:12px">싫어요  ${board.boardRatingb } <i class="fa fa-thumbs-o-down"></i></button>
 		</form>
 	</center>
 		<hr>
@@ -96,7 +92,7 @@
 	<form action="insertReply.do" method="post">
 		<input type="text" name="userCode" style="display: none"  value="${user.userCode}"/>
 		<input type="text" name="boardNo" style="display: none"  value="${board.boardNo}"/>
-			<table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" >
+		<!--  	<table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" >
 			<tr>
 					<th bgcolor="#dfefff">아이디</th>
 					<td align="left"><input type="text" name="id" align="left" value="${user.id}" readonly/>
@@ -106,13 +102,11 @@
 					<th bgcolor="#dfefff">유저코드</th>
 					<td align="left"><input type="text" name="id" align="left" value="${user.userCode}" readonly/>
 					</td>
-			</tr>		
-			<tr>
-					<th bgcolor="#dfefff" width="70">내용</th>
-					<td align="left"><input type="text" name="userReply" /></td>
-			</tr>
-				</table>
-				<center><button type="submit" type="button" class="btn btn-primary"> 댓글 등록</button></center>
+			</tr>			
+				</table>-->
+				<input type="hidden" name="id" align="left" value="${user.userCode}"/>
+				<input type="text" class="form-control" name="userReply" placeholder="댓글을 입력해주세요"/>
+				<p align="right"><button type="submit" type="button" class="btn btn-default"> 댓글 등록</button></p>
 		</form>
 		</div>
 	<div class="container">	
@@ -120,37 +114,29 @@
 				
 		<p align="right">
 			<button class="btn btn-warning" onclick="getReply.do?userReplyNo=${Reply.userReplyNo}">댓글보기</button></p>
-			<table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" width="700">
-				<thead>
-					<tr>
-						<th bgcolor="#dfefff" width="100">유저코드</th>
-						<th bgcolor="#dfefff" width="200">내용</th>
+			<table class="table table-bordered">
+				<tr>
+						<th colspan="2" bgcolor="#dfefff" width="100">댓글</th>
+						<th bgcolor="#dfefff" width="200">수정/삭제</th>
 					</tr>
-					<tr>
-					<td colspan="2"></td></tr>
-				</thead>
-				<tbody>
-				
-					<c:forEach items="${ReplyList}" var="reply">
+				<c:forEach items="${ReplyList}" var="reply">
 					<input type="text" name="userCode" style="display: none"  value="${user.userCode}"/>
 					<input type="text" name="boardNo" style="display: none"  value="${board.boardNo}"/>
 					<input type="text" name="userReplyNo" style="display: none"  value="${reply.userReplyNo}"/>
 					<tr>
-						
-						<td align="left"><input type="text" name="id" align="left" value="${reply.userCode}" readonly/>
-					
-						<td>${reply.userReply}</td>
-						<td colspan="2" align="center">
-						
- 						<c:if test="${reply.userCode == user.userCode}">
-						<button type="button" onclick="location.href='getReply.do?userReplyNo=${reply.userReplyNo}'">댓글 수정</button>
-						<button type="button" onclick="location.href='deleteReply.do?userReplyNo=${reply.userReplyNo}'">댓글 삭제</button>
+					<td colspan="2">
+					<!-- <td align="left"><input type="hidden" name="id" align="left" value="${reply.userCode}" readonly/><br>-->
+					<p><b>${reply.userCode}</b><br>
+					${reply.userReply}</p>
+					<td align="center">
+					<c:if test="${reply.userCode == user.userCode}">
+						<button class="size" type="button" onclick="location.href='getReply.do?userReplyNo=${reply.userReplyNo}'">수정</button><br>
+						<button class="size" type="button" onclick="location.href='deleteReply.do?userReplyNo=${reply.userReplyNo}'">삭제</button>
  						</c:if>
-						</td>
-					
+					</td>
 					</tr>
 					</c:forEach>
-				</tbody>
+				
 			</table>
 			</form>
 			</div>
