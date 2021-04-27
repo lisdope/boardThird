@@ -1,8 +1,6 @@
 package com.springbook.view.board;
 
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.board.Criteria;
 import com.springbook.biz.board.PageMaker;
-import com.springbook.biz.user.UserVO;
 
 @Controller
 @SessionAttributes("board")
@@ -27,14 +24,14 @@ public class BoardController {
 	@RequestMapping("/insertBoard.do")
 	public String insertBoard(BoardVO vo) {
 		boardService.insertBoard(vo);
-		return "index.jsp";
+		return "getBoardList.do";
 	}
 	
 	// 공지사항 등록
 	@RequestMapping("/insertBoard_n.do")
 	public String insertBoard_n(BoardVO vo) {
 		boardService.insertBoard_n(vo);
-		return "index.jsp";
+		return "getBoardList.do";
 	}
 	
 	 // 글 수정
