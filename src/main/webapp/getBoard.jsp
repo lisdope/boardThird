@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
  <!-- Bootstrap -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -31,43 +31,38 @@
 			<form action="updateBoard.do" method="post">
 				<table class="table table-bordered" border="1">
 				<colgroup>
-				<col span="4">
+				<col span="6">
 				</colgroup>
 				<tbody>
 					<tr>
 						<th bgcolor="#dfefff">번호</th>
-						<td colspan="3" align="left">${board.boardNo }</td>
-					</tr>
-					<tr>
-						<th bgcolor="#dfefff">유저코드</th>
-						<td colspan="3" align="left">${board.userCode }</td>
-					</tr>
-					<tr>
-						<th bgcolor="#dfefff">유저(권한) 등급</th>
-						<td colspan="3" align="left">${board.grade }</td>
-					</tr>
-					<tr>
+						<td colspan="1" align="left">${board.boardNo }</td>
 						<th bgcolor="#dfefff">제목</th>
-						<td colspan="3" align="left">${board.boardTitle }</td>
+						<td colspan="5" align="left">${board.boardTitle }</td>
+					</tr>
+					<tr>	
+						<th bgcolor="#dfefff">유저코드</th>
+						<td colspan="1" align="left">${board.userCode }</td>
+						<th bgcolor="#dfefff">유저(권한) 등급</th>
+						<td colspan="1" align="left">${board.grade }</td>
+						<th bgcolor="#dfefff">등록일</th>
+						<td colspan="1" align="left">${board.boardDate }</td>
+						
 					</tr>
 					<tr>
 						<th bgcolor="#dfefff">내용</th>
-						<td colspan="3" align="left"><textarea name="boardContents" cols="70%" rows="10">${board.boardContents}</textarea></td>
+						<td colspan="6" align="left"><textarea name="boardContents" cols="100%" rows="10">${board.boardContents}</textarea></td>
 					</tr>
-					<tr>
-						<th bgcolor="#dfefff">등록일</th>
-						<td colspan="3" align="left">${board.boardDate }</td>
-					</tr>
-					<tr>
-						<th bgcolor="#dfefff">조회수</th>
-						<td colspan="3" align="left">${board.boardHits }</td>
-					</tr></tbody>
+					</tbody>
 					<tfoot>
 						<tr>
+						<th bgcolor="#dfefff">조회수</th>
+						<td colspan="1" align="left">${board.boardHits }</td>
 						<th bgcolor="#dfefff">좋아요</th>
 						<td align="left">${board.boardRating }</td>
 						<th bgcolor="#dfefff">싫어요</th>
 						<td align="left">${board.boardRatingb }</td>
+						</tr>
 					</tfoot>
 				</table>
 					<p align="right">
@@ -121,11 +116,7 @@
 					<td align="left"><input type="text" name="userReply" /></td>
 			</tr>
 				</table>
-			
 				<center><button type="submit" type="button" class="btn btn-primary"> 댓글 등록</button></center>
-
-
-			
 		</form>
 		</div>
 	<div class="container">	
