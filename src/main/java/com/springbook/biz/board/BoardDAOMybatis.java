@@ -36,7 +36,13 @@ public class BoardDAOMybatis{
 //	}
 	
 	public List<BoardVO> getBoardList(Criteria cri) {
-		return mybatis.selectList("Board.getBoardList", cri);
+		System.out.println("===> Mybatis로 getBoardList()기능 처리");
+		if(cri.getSearchCondition().equals("TITLE")) {
+			return mybatis.selectList("Board.getBoardList_t", cri);
+		}else if (cri.getSearchCondition().equals("CONTENT")) {
+			return mybatis.selectList("Board.getBoardList_c", cri);
+		}
+		return null;
 	}
 	public List<BoardVO> getBoardList_n(Criteria cri) {
 		return mybatis.selectList("Board.getBoardList_n", cri);
@@ -45,4 +51,15 @@ public class BoardDAOMybatis{
 		return mybatis.selectOne("Board.listCount");
 	}
 	
+	public void updateBoardRating(BoardVO vo) {
+		mybatis.update("Board.updateBoardRating", vo);
+		
+	}
+	public void updateBoardRatingb(BoardVO vo) {
+		mybatis.update("Board.updateBoardRatingb", vo);
+	}
+	
+	public void updateViewCnt(BoardVO vo) {
+		mybatis.update("Board.increment", vo);
+	}
 }

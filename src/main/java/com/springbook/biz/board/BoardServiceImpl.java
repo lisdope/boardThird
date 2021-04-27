@@ -27,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	public BoardVO getBoard(BoardVO vo) {
+		boardDAO.updateViewCnt(vo);
 		return boardDAO.getBoard(vo);
 	}
 
@@ -42,6 +43,13 @@ public class BoardServiceImpl implements BoardService {
 	public int listCount() throws Exception {
 		return boardDAO.listCount();
 	}
+	
+	public void updateBoardRating(BoardVO vo){
+		boardDAO.updateBoardRating(vo);
+	}
 
+	public void updateBoardRatingb(BoardVO vo) {
+		boardDAO.updateBoardRatingb(vo);
+	}
 	
 }

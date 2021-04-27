@@ -22,4 +22,8 @@ public interface BoardService {
 
 	public int listCount() throws Exception;
 	
+	void updateBoardRating(BoardVO vo);
+	
+
+	void updateBoardRatingb(BoardVO vo);
 }

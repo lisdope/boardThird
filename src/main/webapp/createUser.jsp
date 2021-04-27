@@ -68,6 +68,10 @@ function checkValue(){
 						<option value="011">011</option>					
 					</select>
 			<input type="text"  style="width:100px;" name="phoneNum" /></td></tr>
+						<tr><td>번호</td><td><select name="grade" id="grade">
+						<option value="USER">USER</option>
+						<option value="ADMIN">ADMIN</option>					
+					</select>
 			<tr><td>우편번호 </td><td><input type="text"  style="width:100px;" id="zipNo"  name="postNum" /><input type="button" onClick="goPopup();" value="주소검색"/></td>
 			<tr><td>도로명주소</td><td><input type="text"  style="width:500px;" id="roadFullAddr"  name="address" /></td></tr>
 			<tr><td>이미지</td><td><input type="text"  style="width:200px;" name="userImage" /></td></tr>

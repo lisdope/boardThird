@@ -7,6 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>글 상세</title>
+<style type="text/css">
+ 
+ .Rating{
+ 	display: inline;
+ }
+
+</style>
 </head>
 <body>
 	<center>
@@ -47,6 +54,10 @@
 						<td bgcolor="orange">좋아요</td>
 						<td align="left">${board.boardRating }</td>
 					</tr>
+						<tr>
+						<td bgcolor="orange">싫어요</td>
+						<td align="left">${board.boardRatingb }</td>
+					</tr>
 					<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
@@ -61,7 +72,19 @@
 		<a href="deleteBoard.do?boardNo=${board.boardNo }">글삭제</a>&nbsp;&nbsp;&nbsp; 
 		</c:if>
 		<a href="insertBoard.jsp">글등록</a>&nbsp;&nbsp;&nbsp; 
-		<a href="getBoardList.do">글목록</a>
+		<a href="getBoardList.do">글목록</a>&nbsp;&nbsp;&nbsp; 
+		<form class="Rating" action="updateBoardRating.do" method="get">		
+		<input type="text" name="boardNo" style="display: none" value="${board.boardNo}" />
+		<input type="text" name="userCode" style="display: none" value="${user.userCode}" />
+		<input type="text" name="boardRating"  style="display: none" value="${board.boardRating}" />
+		<input type="submit" value="좋아요" />	
+		</form>&nbsp;&nbsp;
+		<form class="Rating" action="updateBoardRatingb.do" method="get">
+		<input type="text" name="boardNo"  style="display: none" value="${board.boardNo}" />
+		<input type="text" name="userCode"  style="display: none" value="${user.userCode}" />
+		<input type="text" name="boardRatingb" style="display: none" value="${board.boardRatingb}" />
+		<input type="submit" value="싫어요" />
+		</form>
 	</center>
 	
 	

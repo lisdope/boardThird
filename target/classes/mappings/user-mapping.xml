@@ -67,6 +67,7 @@
 				  , PHONE_NUM
 				  , ADDRESS
 				  , ENT_DATE
+				  , GRADE
 				  ) VALUES(
 				  USER_SEQ.NEXTVAL
 				  , #{id}
@@ -80,6 +81,7 @@
 				  , #{phoneNum}
 				  , #{address}
 				  , TO_CHAR(SYSDATE, 'YYYY-MM-DD-HH24:MI')
+				  , #{grade}
 				  )
 		]]>
 	</insert>
