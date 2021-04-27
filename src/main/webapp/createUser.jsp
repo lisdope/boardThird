@@ -12,7 +12,6 @@ function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 	var pop = window.open("/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 }
@@ -20,8 +19,8 @@ function goPopup(){
 
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.zipNo.value = zipNo;
+		document.userInfo.roadFullAddr.value = roadFullAddr;
+		document.userInfo.zipNo.value = zipNo;
 }
 function idchk(){
 	var id = document.getElementById("id").value;
@@ -51,7 +50,7 @@ function checkValue(){
 	}	
 }
 </script>
-<title>정보수정</title>
+<title>회원가입</title>
 </head>
 <body>
 <form action="createUser.do" name="userInfo" id="form" method="post" onsubmit="return checkValue()">
@@ -61,23 +60,23 @@ function checkValue(){
 			<tr><td><input type="hidden" name="idDuplication" value="uncheck" ></td></tr>
 			<tr><td>비밀번호</td><td><input type="password"  style="width:100px;" name="pw" id="pw" /></td></tr>
 			<tr><td>이름</td><td><input type="text"  style="width:50px;" name="name" id="name" /></td></tr>
-			<tr><td>생일</td><td><input type="text" name="birth" id="birth" /></td></tr>
+			<tr><td>생일</td><td><input type="date" name="birth" id="birth"/></td></tr>
 			<tr><td>이메일</td><td><input type="text"  style="width:200px;" name="email" id="email" /></td></tr>
 			<tr><td>번호</td><td><select name="phoneCd" id="phoneCd">
 						<option value="010">010</option>
 						<option value="011">011</option>					
-					</select>
-			<input type="text"  style="width:100px;" name="phoneNum" /></td></tr>
-						<tr><td>번호</td><td><select name="grade" id="grade">
+					</select><input type="text"  style="width:100px;" name="phoneNum" /></td></tr>
+						<tr><td>등급</td><td>
+						<select name="grade">
 						<option value="USER">USER</option>
 						<option value="ADMIN">ADMIN</option>					
-					</select>
-			<tr><td>우편번호 </td><td><input type="text"  style="width:100px;" id="zipNo"  name="postNum" /><input type="button" onClick="goPopup();" value="주소검색"/></td>
-			<tr><td>도로명주소</td><td><input type="text"  style="width:500px;" id="roadFullAddr"  name="address" /></td></tr>
+					</select></td></tr>
+			<tr><td>우편번호 </td><td><input type="text"  style="width:100px;" id="zipNo"  name="postNum" readonly/>
+			<input type="button" onClick="goPopup();" value="주소검색"/></td></tr>
+			<tr><td>도로명주소</td><td><input type="text"  style="width:600px;" id="roadFullAddr"  name="address" readonly/></td></tr>
 			<tr><td>이미지</td><td><input type="text"  style="width:200px;" name="userImage" /></td></tr>
 			<tr><td><input type="submit" value="가입하기 " /></td></tr>
 		</table>
-
 </form>
 </body>
 </html>
