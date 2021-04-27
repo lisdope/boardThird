@@ -54,7 +54,7 @@
 	
 	<delete id="deleteReply" parameterType="reply">
 		<![CDATA[
-		/*	deleteReply	*/
+		/*	deleteReplyss	*/
 			DELETE
 			FROM  TB_REPLY
 			WHERE USER_REPLY_NO = #{userReplyNo}
