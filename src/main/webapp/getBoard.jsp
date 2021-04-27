@@ -6,123 +6,141 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+ <!-- Bootstrap -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <title>글 상세</title>
 <style type="text/css">
- 
  .Rating{
- 	display: inline;
- }
+ 	display: inline;}
+ th,td{border:1px solid; width: 50px; font-size:12px; font-color:blue;padding:5px 5px; }
+ h1{font-family: 'Noto Sans KR', sans-serif;}
+ p.logout{font-family: 'Noto Sans KR', sans-serif;}
+ 
 
 </style>
 </head>
 <body>
 	<center>
+		<div class="container">
 		<h1>글 상세</h1>
-		<a href="logout.do">Log-out</a>
-		
+		<p class="logout" align="right">
+		<a href="logout.do">Log-out</a></p>
 			<form action="updateBoard.do" method="post">
-				<table border="1" cellpadding="0" cellspacing="0">
+				<table class="table table-bordered" border="1">
+				<colgroup>
+				<col span="4">
+				</colgroup>
+				<tbody>
 					<tr>
-						<td bgcolor="orange">번호<td>
-						<td align="left">${board.boardNo }</td>
+						<th bgcolor="#dfefff">번호</th>
+						<td colspan="3" align="left">${board.boardNo }</td>
 					</tr>
 					<tr>
-						<td bgcolor="orange">유저코드<td>
-						<td align="left">${board.userCode }</td>
+						<th bgcolor="#dfefff">유저코드</th>
+						<td colspan="3" align="left">${board.userCode }</td>
 					</tr>
 					<tr>
-						<td bgcolor="orange">유저(권한) 등급<td>
-						<td align="left">${board.grade }</td>
+						<th bgcolor="#dfefff">유저(권한) 등급</th>
+						<td colspan="3" align="left">${board.grade }</td>
 					</tr>
 					<tr>
-						<td bgcolor="orange">제목</td>
-						<td align="left">${board.boardTitle }</td>
+						<th bgcolor="#dfefff">제목</th>
+						<td colspan="3" align="left">${board.boardTitle }</td>
 					</tr>
 					<tr>
-						<td bgcolor="orange">내용</td>
-						<td align="left"><textarea name="boardContents" cols="40" rows="10">${board.boardContents}</textarea></td>
+						<th bgcolor="#dfefff">내용</th>
+						<td colspan="3" align="left"><textarea name="boardContents" cols="70%" rows="10">${board.boardContents}</textarea></td>
 					</tr>
 					<tr>
-						<td bgcolor="orange">등록일</td>
-						<td align="left">${board.boardDate }</td>
+						<th bgcolor="#dfefff">등록일</th>
+						<td colspan="3" align="left">${board.boardDate }</td>
 					</tr>
 					<tr>
-						<td bgcolor="orange">조회수</td>
-						<td align="left">${board.boardHits }</td>
-					</tr>
+						<th bgcolor="#dfefff">조회수</th>
+						<td colspan="3" align="left">${board.boardHits }</td>
+					</tr></tbody>
+					<tfoot>
 						<tr>
-						<td bgcolor="orange">좋아요</td>
+						<th bgcolor="#dfefff">좋아요</th>
 						<td align="left">${board.boardRating }</td>
-					</tr>
-						<tr>
-						<td bgcolor="orange">싫어요</td>
+						<th bgcolor="#dfefff">싫어요</th>
 						<td align="left">${board.boardRatingb }</td>
-					</tr>
-					<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
-					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="글 수정" /></td>
-					</tr>
-					</c:if>
+					</tfoot>
 				</table>
+					<p align="right">
+					<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
+						<button type="submit" type="button" class="btn btn-warning">글수정</button>
+					</c:if></p>
+					
 			</form>
-		
-		<hr>
+		</div>
 		<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
-		<a href="deleteBoard.do?boardNo=${board.boardNo }">글삭제</a>&nbsp;&nbsp;&nbsp; 
+		<a href="deleteBoard.do?boardNo=${board.boardNo }"><button type="button" class="btn btn-primary">글삭제</button></a>&nbsp;&nbsp;&nbsp; 
 		</c:if>
-		<a href="insertBoard.jsp">글등록</a>&nbsp;&nbsp;&nbsp; 
-		<a href="getBoardList.do">글목록</a>&nbsp;&nbsp;&nbsp; 
+		
+		<a href="insertBoard.jsp"><button type="button" class="btn btn-primary">글등록</button></a>&nbsp;&nbsp;&nbsp; 
+		<a href="getBoardList.do"><button type="button" class="btn btn-primary">글목록</button></a>&nbsp;&nbsp;&nbsp; 
+		<br><br>
+		
 		<form class="Rating" action="updateBoardRating.do" method="get">		
 		<input type="text" name="boardNo" style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode" style="display: none" value="${user.userCode}" />
 		<input type="text" name="boardRating"  style="display: none" value="${board.boardRating}" />
-		<input type="submit" value="좋아요" />	
+		<button type="submit" style="font-size:12px">좋어요 <i class="fa fa-thumbs-o-up"></i></button>
 		</form>&nbsp;&nbsp;
+		
 		<form class="Rating" action="updateBoardRatingb.do" method="get">
 		<input type="text" name="boardNo"  style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode"  style="display: none" value="${user.userCode}" />
 		<input type="text" name="boardRatingb" style="display: none" value="${board.boardRatingb}" />
-		<input type="submit" value="싫어요" />
+		<button type="submit" style="font-size:12px">싫어요 <i class="fa fa-thumbs-o-down"></i></button>
 		</form>
 	</center>
-	
-	
+		<hr>
+	<br>
+<div class="container">	
 	<form action="insertReply.do" method="post">
 		<input type="text" name="userCode" style="display: none"  value="${user.userCode}"/>
 		<input type="text" name="boardNo" style="display: none"  value="${board.boardNo}"/>
-			<table border="1" cellpadding="0" cellspacing="0" >
+			<table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" >
 			<tr>
-					<td bgcolor="orange">아이디</td>
+					<th bgcolor="#dfefff">아이디</th>
 					<td align="left"><input type="text" name="id" align="left" value="${user.id}" readonly/>
 					</td>
 			</tr>
 			<tr>
-					<td bgcolor="orange">유저코드</td>
+					<th bgcolor="#dfefff">유저코드</th>
 					<td align="left"><input type="text" name="id" align="left" value="${user.userCode}" readonly/>
 					</td>
 			</tr>		
 			<tr>
-					<td bgcolor="orange" width="70">내용</td>
+					<th bgcolor="#dfefff" width="70">내용</th>
 					<td align="left"><input type="text" name="userReply" /></td>
 			</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit"
-						value=" 댓글 등록 " /></td>
+				</table>
+			
+				<center><button type="submit" type="button" class="btn btn-primary"> 댓글 등록</button></center>
 
-				</tr>
-			</table>
+
+			
 		</form>
-		
+		</div>
+	<div class="container">	
 		<form action="getReplyList.do" method="post">
 				
-				<button onclick="getReply.do?userReplyNo=${Reply.userReplyNo}" >댓글보기</button>
-				<table border="1" cellpadding="0" cellspacing="0" width="700">
+		<p align="right">
+			<button class="btn btn-warning" onclick="getReply.do?userReplyNo=${Reply.userReplyNo}">댓글보기</button></p>
+			<table class="table table-bordered" border="1" cellpadding="0" cellspacing="0" width="700">
 				<thead>
 					<tr>
-						<th bgcolor="orange" width="100">유저코드</th>
-						<th bgcolor="orange" width="200">내용</th>
+						<th bgcolor="#dfefff" width="100">유저코드</th>
+						<th bgcolor="#dfefff" width="200">내용</th>
 					</tr>
+					<tr>
+					<td colspan="2"></td></tr>
 				</thead>
 				<tbody>
 				
@@ -148,5 +166,6 @@
 				</tbody>
 			</table>
 			</form>
+			</div>
 </body>
 </html>
