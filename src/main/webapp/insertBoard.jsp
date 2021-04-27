@@ -19,14 +19,14 @@
 					<td bgcolor="orange" width="70">제목</td>
 					<td align="left"><input type="text" name="boardTitle" /></td>
 				</tr>
-				<tr>
+			<!-- 	<tr>
 					<td bgcolor="orange" width="70">글등록날짜</td>
 					<td align="left"><input type="text" name="boardDate" /></td>
 				</tr>
 				<tr>
 					<td bgcolor="orange" width="70">조회수</td>
 					<td align="left"><input type="text" name="boardHits" /></td>
-				</tr>
+				</tr>-->
 				<tr>
 					<td bgcolor="orange" width="70">좋아요</td>
 					<td align="left"><input type="text" name="boardRating" /></td>

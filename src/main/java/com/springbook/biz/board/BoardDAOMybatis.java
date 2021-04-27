@@ -59,5 +59,7 @@ public class BoardDAOMybatis{
 		mybatis.update("Board.updateBoardRatingb", vo);
 	}
 	
-	
+	public void updateViewCnt(BoardVO vo) {
+		mybatis.update("Board.increment", vo);
+	}
 }

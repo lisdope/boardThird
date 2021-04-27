@@ -19,7 +19,7 @@
 	<insert id="insertBoard" parameterType="board">
 		<![CDATA[
 		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING)
-		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, #{boardDate}, #{userCode}, 'USER', #{boardHits}, #{boardRating})
+		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, SYSDATE, #{userCode}, 'USER', 0, #{boardRating})
 		
 		]]>
 	</insert>
@@ -161,5 +161,11 @@
 			SET BOARD_RATING_B  = BOARD_RATING_B + 1
 			WHERE BOARD_NO = #{boardNo}
 		]]>
+	</update>
+	
+	<!--조회수증가-->
+	<update id="increment" parameterType="board">
+		UPDATE TB_BOARD SET BOARD_HITS=NVL(BOARD_HITS,0)+1
+		WHERE BOARD_NO = #{boardNo}
 	</update>
 </mapper>
