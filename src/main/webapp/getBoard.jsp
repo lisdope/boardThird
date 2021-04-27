@@ -25,10 +25,10 @@
 <body>
 	<center>
 		<div class="container">
-		<h1>글 상세</h1>
+		<h1>게시판</h1>
 		<p class="logout" align="right">
 		<a href="logout.do">Log-out</a></p>
-			<form action="updateBoard.do" method="post">
+		  	
 				<table class="table table-bordered" border="1">
 				<colgroup>
 				<col span="6">
@@ -46,15 +46,8 @@
 						<th bgcolor="#dfefff">유저(권한) 등급</th>
 						<td colspan="1" align="left">${board.grade }</td>
 						<th bgcolor="#dfefff">등록일</th>
-						<td colspan="1" align="left">${board.boardDate }</td>
-						
+						<td colspan="1" align="left">${board.boardDate }</td>				
 					</tr>
-					<tr>
-						<th bgcolor="#dfefff">내용</th>
-						<td colspan="6" align="left"><textarea name="boardContents" cols="100%" rows="10">${board.boardContents}</textarea></td>
-					</tr>
-					</tbody>
-					<tfoot>
 						<tr>
 						<th bgcolor="#dfefff">조회수</th>
 						<td colspan="1" align="left">${board.boardHits }</td>
@@ -63,15 +56,18 @@
 						<th bgcolor="#dfefff">싫어요</th>
 						<td align="left">${board.boardRatingb }</td>
 						</tr>
+					</tbody>
+					<tfoot>
+					<tr>
+						<th bgcolor="#dfefff">내용</th>
+						<td colspan="6" align="left">${board.boardContents}</td>
+					</tr>
 					</tfoot>
 				</table>
-					<p align="right">
-					<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
-						<button type="submit" type="button" class="btn btn-warning">글수정</button>
-					</c:if></p>
-					
-			</form>
 		</div>
+		<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
+		<a class="btn btn-primary" href="updateBoard.jsp">글수정</a>&nbsp;&nbsp;&nbsp; 
+		</c:if>					
 		<c:if test="${(sessionScope.user.grade eq 'ADMIN') || (sessionScope.user.grade eq 'USER' && sessionScope.board.grade eq 'USER')}">
 		<a href="deleteBoard.do?boardNo=${board.boardNo }"><button type="button" class="btn btn-primary">글삭제</button></a>&nbsp;&nbsp;&nbsp; 
 		</c:if>
