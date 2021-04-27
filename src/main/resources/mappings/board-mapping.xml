@@ -36,9 +36,9 @@
 	<update id="updateBoard" parameterType="board">
 		<![CDATA[
 		UPDATE TB_BOARD SET
-		BOARD_TITLE = #{boardTitle},S
+		BOARD_TITLE = #{boardTitle},
 		BOARD_CONTENTS = #{boardContents},
-		BOARD_DATE = #{boardDate},
+		BOARD_DATE = SYSDATE,
 		USER_CODE = #{userCode},
 		GRADE     = #{grade},
 		BOARD_HITS =  #{boardHits},
