@@ -72,13 +72,13 @@
 		<a href="deleteBoard.do?boardNo=${board.boardNo }">글삭제</a>&nbsp;&nbsp;&nbsp; 
 		</c:if>
 		<a href="insertBoard.jsp">글등록</a>&nbsp;&nbsp;&nbsp; 
-		<a href="getBoardList.do">글목록</a>
+		<a href="getBoardList.do">글목록</a>&nbsp;&nbsp;&nbsp; 
 		<form class="Rating" action="updateBoardRating.do" method="get">		
 		<input type="text" name="boardNo" style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode" style="display: none" value="${user.userCode}" />
 		<input type="text" name="boardRating"  style="display: none" value="${board.boardRating}" />
 		<input type="submit" value="좋아요" />	
-		</form>
+		</form>&nbsp;&nbsp;
 		<form class="Rating" action="updateBoardRatingb.do" method="get">
 		<input type="text" name="boardNo"  style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode"  style="display: none" value="${user.userCode}" />
