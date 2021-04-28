@@ -11,23 +11,23 @@
 		<result property="userCode" column="USER_CODE" />
 		<result property="grade" column="GRADE" />
 		<result property="boardHits" column="BOARD_HITS" />
-		<result property="boardRating" column="BOARD_RATING" />
-		<result property="boardRatingb" column="BOARD_RATING_B" />
+		<result property="boardRatingLike" column="BOARD_RATING_LIKE" />
+		<result property="boardRatingHate" column="BOARD_RATING_HATE" />
 	</resultMap>
 	
 
 	<insert id="insertBoard" parameterType="board">
 		<![CDATA[
-		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING)
-		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, SYSDATE, #{userCode}, 'USER', 0, #{boardRating})
+		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING_LIKE, BOARD_RATING_HATE)
+		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, SYSDATE, #{userCode}, 'USER', #{boardHits , jdbcType=VARCHAR} , #{boardRatingLike}, #{boardRatingHate})
 		
 		]]>
 	</insert>
 	
 	<insert id="insertBoard_n" parameterType="board">
 		<![CDATA[
-		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING)
-		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, #{boardDate}, #{userCode}, 'ADMIN', #{boardHits}, #{boardRating})
+		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING_LIKE, BOARD_RATING_HATE)
+		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, #{boardDate}, #{userCode}, 'ADMIN', #{boardHits}, #{boardRatingLike})
 		
 		]]>
 	</insert>
@@ -42,7 +42,7 @@
 		USER_CODE = #{userCode},
 		GRADE     = #{grade},
 		BOARD_HITS =  #{boardHits},
-		BOARD_RATING = #{boardRating}
+		BOARD_RATING_LIKE = #{boardRatingLike}
 		WHERE BOARD_NO = #{boardNo}
 		]]>
 	</update>
@@ -87,7 +87,8 @@
                         USER_CODE,
                         GRADE,
                         BOARD_HITS,
-                        BOARD_RATING,
+                        BOARD_RATING_LIKE,
+                        BOARD_RATING_HATE,
 		                ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS RNUM
 		        		FROM TB_BOARD) MP
 		WHERE (RNUM BETWEEN #{rowStart} AND #{rowEnd})
@@ -102,7 +103,8 @@
                         USER_CODE,
                         GRADE,
                         BOARD_HITS,
-                        BOARD_RATING,
+                        BOARD_RATING_LIKE,
+                        BOARD_RATING_HATE,
 		                ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS RNUM
 		        		FROM TB_BOARD) MP
 		WHERE (RNUM BETWEEN #{rowStart} AND #{rowEnd})
@@ -118,7 +120,8 @@
                         USER_CODE,
                         GRADE,
                         BOARD_HITS,
-                        BOARD_RATING,
+                        BOARD_RATING_LIKE,
+                        BOARD_RATING_HATE,
 		                ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) AS RNUM
 		        		FROM TB_BOARD) MP
 		WHERE (RNUM BETWEEN #{rowStart} AND #{rowEnd})
@@ -145,20 +148,20 @@
 	]]>
 	</select><!-- 게시물의 총 갯구를 구하자 -->
 	
-	<update id="updateBoardRating" parameterType="board">
+	<update id="boardRatingLike" parameterType="board">
 		<![CDATA[
 		
 			UPDATE TB_BOARD
-			SET BOARD_RATING  = BOARD_RATING + 1
+			SET BOARD_RATING_LIKE  = BOARD_RATING_LIKE + 1
 			WHERE BOARD_NO = #{boardNo}
 		]]>
 	</update>
 	
-	<update id="updateBoardRatingb" parameterType="board">
+	<update id="boardRatingHate" parameterType="board">
 		<![CDATA[
 		
 			UPDATE TB_BOARD
-			SET BOARD_RATING_B  = BOARD_RATING_B + 1
+			SET BOARD_RATING_HATE  = BOARD_RATING_HATE + 1
 			WHERE BOARD_NO = #{boardNo}
 		]]>
 	</update>

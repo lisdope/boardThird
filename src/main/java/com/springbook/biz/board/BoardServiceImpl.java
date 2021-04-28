@@ -44,12 +44,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.listCount();
 	}
 	
-	public void updateBoardRating(BoardVO vo){
-		boardDAO.updateBoardRating(vo);
+	public void boardRatingLike(BoardVO vo){
+		boardDAO.boardRatingLike(vo);
 	}
 
-	public void updateBoardRatingb(BoardVO vo) {
-		boardDAO.updateBoardRatingb(vo);
+	public void boardRatingHate(BoardVO vo) {
+		boardDAO.boardRatingHate(vo);
 	}
 	
 }

@@ -22,8 +22,7 @@ public interface BoardService {
 
 	public int listCount() throws Exception;
 	
-	void updateBoardRating(BoardVO vo);
-	
+	void boardRatingLike(BoardVO vo);
 
-	void updateBoardRatingb(BoardVO vo);
+	void boardRatingHate(BoardVO vo);
 }

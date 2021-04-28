@@ -14,8 +14,8 @@ public class BoardVO {
 	private String boardContents;   //게시글내용
 	private String boardDate;       //게시글작성일자
 	private int boardHits;       //게시글조회수
-	private String boardRating;     //게시글좋아요
-	private String boardRatingb;    //게시글싫어요
+	private String boardRatingLike; //게시글좋아요
+	private String boardRatingHate; //게시글싫어요
 	private String searchCondition; //검색 조건
 	private String searchKeyword;   //검색 키워드
 }

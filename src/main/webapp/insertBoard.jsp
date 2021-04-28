@@ -29,7 +29,11 @@
 				</tr>-->
 				<tr>
 					<td bgcolor="orange" width="70">좋아요</td>
-					<td align="left"><input type="text" name="boardRating" /></td>
+					<td align="left"><input type="text" name="boardRatingLike" style="display: none" value="0"/> </td>
+				</tr>
+				<tr>
+					<td bgcolor="orange" width="70">싫어요</td>
+					<td align="left"><input type="text" name="boardRatingHate" style="display: none" value="0"/></td>
 				</tr>
 				<tr>
 					<td bgcolor="orange">내용</td>

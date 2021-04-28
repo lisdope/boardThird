@@ -10,6 +10,7 @@
 		<typeAlias alias="board" type="com.springbook.biz.board.BoardVO" />
 		<typeAlias alias="reply" type="com.springbook.biz.reply.ReplyVO"/>
 		<typeAlias alias="Criteria" type="com.springbook.biz.board.Criteria" />
+		<typeAlias alias="mark" type="com.springbook.biz.mark.MarkVO" />
 	</typeAliases>
 	
 	<!-- Sql Mapper 설정 -->
@@ -17,5 +18,6 @@
 		<mapper resource="mappings/user-mapping.xml" />
 		<mapper resource="mappings/board-mapping.xml" />
 		<mapper resource="mappings/reply-mapping.xml"/>
+		<mapper resource="mappings/mark-mapping.xml"/>
 	</mappers>
 </configuration>

@@ -50,7 +50,11 @@ border : 0px solid;}
 						<th bgcolor="#dfefff">조회수</th>
 						<td colspan="1" align="left">${board.boardHits }</td>
 						<th bgcolor="#dfefff">등록일</th>
-						<td colspan="1" align="left">${board.boardDate }</td>				
+						<td colspan="1" align="left">${board.boardDate }</td>
+						<th bgcolor="#dfefff">좋아요</th>
+						<td align="left">${board.boardRatingLike }</td>
+						<th bgcolor="#dfefff">싫어요</th>
+						<td align="left">${board.boardRatingHate }</td>				
 						</tr>
 					</tbody>
 					<tfoot>
@@ -72,18 +76,18 @@ border : 0px solid;}
 		<a href="getBoardList.do"><button type="button" class="btn btn-primary">글목록</button></a>&nbsp;&nbsp;&nbsp; 
 		<br><br>
 		
-		<form class="Rating" action="updateBoardRating.do" method="get">		
+		<form class="Rating" action="updateBoardRatingLike.do" method="get">		
 		<input type="text" name="boardNo" style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode" style="display: none" value="${user.userCode}" />
-		<input type="text" name="boardRating"  style="display: none" value="${board.boardRating}" />
-		<button type="submit" style="font-size:12px">좋어요 ${board.boardRating } <i class="fa fa-thumbs-o-up"></i></button>
+		<input type="text" name="boardRatingLike"  style="display: none" value="${board.boardRatingLike}" />
+		<button type="submit" style="font-size:12px">좋어요 <i class="fa fa-thumbs-o-up"></i></button>
 		</form>&nbsp;&nbsp;
 		
-		<form class="Rating" action="updateBoardRatingb.do" method="get">
+		<form class="Rating" action="updateBoardRatingHate.do" method="get">
 		<input type="text" name="boardNo"  style="display: none" value="${board.boardNo}" />
 		<input type="text" name="userCode"  style="display: none" value="${user.userCode}" />
-		<input type="text" name="boardRatingb" style="display: none" value="${board.boardRatingb}" />
-		<button type="submit" style="font-size:12px">싫어요  ${board.boardRatingb } <i class="fa fa-thumbs-o-down"></i></button>
+		<input type="text" name="boardRatingHate" style="display: none" value="${board.boardRatingHate}" />
+		<button type="submit" style="font-size:12px">싫어요 <i class="fa fa-thumbs-o-down"></i></button>
 		</form>
 	</center>
 		<hr>

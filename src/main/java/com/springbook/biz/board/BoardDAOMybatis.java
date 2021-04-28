@@ -51,12 +51,13 @@ public class BoardDAOMybatis{
 		return mybatis.selectOne("Board.listCount");
 	}
 	
-	public void updateBoardRating(BoardVO vo) {
-		mybatis.update("Board.updateBoardRating", vo);
-		
+	public void boardRatingLike(BoardVO vo) {
+		mybatis.update("Board.boardRatingLike", vo);
+
 	}
-	public void updateBoardRatingb(BoardVO vo) {
-		mybatis.update("Board.updateBoardRatingb", vo);
+
+	public void boardRatingHate(BoardVO vo) {
+		mybatis.update("Board.boardRatingHate", vo);
 	}
 	
 	public void updateViewCnt(BoardVO vo) {

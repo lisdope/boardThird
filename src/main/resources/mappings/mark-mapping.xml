@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mark">
+
+	<resultMap id="markResult" type="mark">
+		<id property="boardNo" column="BOARD_NO" />
+		<id property="userCode" column="USER_CODE" />
+	    <result property="markRatingLike" column="MARK_RATING_LIKE"/>
+	    <result property="markRatingHate" column="MARK_RATING_HATE"/>
+	</resultMap>
+
+	<insert id="insertMarkLike" parameterType="mark">
+		<![CDATA[
+		
+			INSERT INTO TB_MARK(
+				BOARD_NO
+			  , USER_CODE
+			  , MARK_RATING_LIKE
+			) VALUES (
+			    #{boardNo}
+			  , #{userCode}
+			  , 1
+			)
+		]]>
+	</insert>
+	
+	<insert id="insertMarkHate" parameterType="mark">
+		<![CDATA[
+		
+			INSERT INTO TB_MARK(
+				BOARD_NO
+			  , USER_CODE
+			  , MARK_RATING_HATE
+			) VALUES (
+			    #{boardNo}
+			  , #{userCode}
+			  , 1
+			)
+		]]>
+	</insert>
+
+</mapper>
