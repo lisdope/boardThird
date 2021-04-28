@@ -9,8 +9,7 @@
 <!-- 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
  -->
-<meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/commons.css">
 <link
@@ -19,16 +18,24 @@
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
 
+
+
 <title>글 목록</title>
 </head>
 <body>
 	<center>
 		<div class="container">
 			<h1 class="index">글 목록</h1>
-			<h3 class="index">
-				${user.name}님! 환영합니다.<a href="logout.do">Log-out</a>
-				<a href="index.jsp">뒤로</a>
-			</h3>
+			<h3 class="index">${user.name}님! 환영합니다.</h3>
+			
+			<p align="left">
+				<button type="button" class="btn btn-outline-warning" onclick="location.href='index.jsp' ">뒤로</button>
+				&nbsp;&nbsp;&nbsp;
+				<button type="button" class="btn btn-outline-info" onclick="location.href='logout.do' ">Log-out</button>
+				</p>
+				
+			
+			
 			<div class="row">
 				<table border="1" cellpadding="0" cellspacing="0" width="700"
 					class="table table-hover fw-bold">
@@ -84,8 +91,9 @@
 						</tr>
 						<c:if test="${sessionScope.user.grade eq 'ADMIN'}">
 							<tr>
-								<td>${user.grade}</td>
+								<td style="color: white;">${user.grade}</td>
 								<td align="center"><a href="insertBoard_n.jsp">공지사항 등록</a></td>
+								<td></td>
 								<td></td>
 							</tr>
 						</c:if>
@@ -93,7 +101,7 @@
 				</table>
 			</div>
 			<div>
-				<nav aria-label="Page navigation example">
+				<nav aria-label="Page navigation example" >
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev}">
 						<li class="page-item"><a class="page-link"

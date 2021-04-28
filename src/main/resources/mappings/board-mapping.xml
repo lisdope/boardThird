@@ -27,7 +27,7 @@
 	<insert id="insertBoard_n" parameterType="board">
 		<![CDATA[
 		INSERT INTO TB_BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENTS, BOARD_DATE, USER_CODE, GRADE, BOARD_HITS, BOARD_RATING_LIKE, BOARD_RATING_HATE)
-		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, #{boardDate}, #{userCode}, 'ADMIN', #{boardHits}, #{boardRatingLike})
+		VALUES((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{boardTitle}, #{boardContents}, SYSDATE, #{userCode}, 'ADMIN', #{boardHits}, #{boardRatingLike}, #{boardRatingHate})
 		
 		]]>
 	</insert>
